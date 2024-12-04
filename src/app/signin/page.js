@@ -33,7 +33,7 @@ export default function SigninPage() {
         <button className="text-black bg-white">Signin</button>
       </form>
       <div className="my-4">
-        Don't have an account? <Link href={"/signup"}>Sign up</Link>
+        Don&rsquo;t have an account? <Link href={"/signup"}>Sign up</Link>
       </div>
     </div>
   );
