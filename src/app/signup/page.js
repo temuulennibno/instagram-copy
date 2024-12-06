@@ -1,11 +1,18 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useContext } from "react";
 import { toast } from "react-toastify";
+import { UserContext } from "../contexts/user-context";
+import { redirect, useRouter } from "next/navigation";
 
 export default function SignupPage() {
+  const { isSignedIn } = useContext(UserContext);
   const router = useRouter();
+
+  if (isSignedIn) {
+    return redirect("/");
+  }
 
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen">

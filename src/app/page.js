@@ -1,12 +1,24 @@
 "use client";
 import { redirect } from "next/navigation";
-import { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "./contexts/user-context";
 
 export default function Home() {
-  const [isSignedIn] = useState(false);
+  const { isSignedIn, setIsSignedIn } = useContext(UserContext);
 
   if (!isSignedIn) {
     return redirect("/signin");
   }
-  return <>INSTAGRAM APP</>;
+  return (
+    <>
+      INSTAGRAM APP
+      <button
+        onClick={() => {
+          setIsSignedIn(false);
+        }}
+      >
+        signout
+      </button>
+    </>
+  );
 }

@@ -1,30 +1,41 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
+import { useContext } from "react";
+import { UserContext } from "../contexts/user-context";
+import { redirect } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function SigninPage() {
+  const { isSignedIn, setIsSignedIn } = useContext(UserContext);
+
+  if (isSignedIn) {
+    return redirect("/");
+  }
+
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen">
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          const email = e.target.email.value;
+          const credential = e.target.credential.value;
           const password = e.target.password.value;
 
           axios
-            .post(`${process.env.NEXT_PUBLIC_API}/signin`, { email, password })
+            .post(`${process.env.NEXT_PUBLIC_API}/signin`, { credential, password })
             .then((res) => {
-              alert(res.data.message);
+              toast.success("Амжилттай нэвтэрлээ");
+              setIsSignedIn(true);
             })
             .catch((err) => {
-              alert(err.response.data.message);
+              toast.error(err.response.data.message);
             });
         }}
         className="flex flex-col gap-4"
       >
         <label className="flex flex-col">
           Credential
-          <input name="credential" type="string" className="text-black" />
+          <input name="credential" type="text" className="text-black" />
         </label>
         <label className="flex flex-col">
           Password
