@@ -15,6 +15,7 @@ export default function Home() {
       <button
         onClick={() => {
           setIsSignedIn(false);
+          localStorage.setItem("isSignedIn", false);
         }}
       >
         signout

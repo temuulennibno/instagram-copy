@@ -26,6 +26,7 @@ export default function SigninPage() {
             .then((res) => {
               toast.success("Амжилттай нэвтэрлээ");
               setIsSignedIn(true);
+              localStorage.setItem("isSignedIn", true);
             })
             .catch((err) => {
               toast.error(err.response.data.message);
