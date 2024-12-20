@@ -3,13 +3,16 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { CiImageOn } from "react-icons/ci";
+import { ImageUploader } from "./ImageUploader";
 
 const CreatePage = () => {
   const [description, setDescription] = useState("");
+  const [mediaUrl, setMediaUrl] = useState("");
   const router = useRouter();
 
   const handleSubmit = async () => {
-    const response = await axios.post("http://localhost:3333/api/posts", { description });
+    const response = await axios.post("http://localhost:3333/api/posts", { description, mediaUrl });
     if (response.status !== 200) {
       toast.error("Post nemehed aldaa garlaa!");
     } else {
@@ -26,6 +29,7 @@ const CreatePage = () => {
         <button onClick={handleSubmit}>Share</button>
       </header>
       <main className="p-4">
+        <ImageUploader setMediaUrl={setMediaUrl} />
         <textarea
           value={description}
           onChange={(e) => {

@@ -29,7 +29,10 @@ export default function Home() {
       <main>
         <ul>
           {posts.map((post) => (
-            <li key={post.id}>{post.description}</li>
+            <li key={post.id}>
+              <img src={post.mediaUrl} alt="" />
+              {post.description}
+            </li>
           ))}
         </ul>
       </main>
