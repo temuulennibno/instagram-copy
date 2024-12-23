@@ -7,10 +7,10 @@ import { UserContext } from "../contexts/user-context";
 import { redirect, useRouter } from "next/navigation";
 
 export default function SignupPage() {
-  const { isSignedIn } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const router = useRouter();
 
-  if (isSignedIn) {
+  if (user) {
     return redirect("/");
   }
 

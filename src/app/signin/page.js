@@ -7,9 +7,9 @@ import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
 
 export default function SigninPage() {
-  const { isSignedIn, setIsSignedIn } = useContext(UserContext);
+  const { user, setAccessToken } = useContext(UserContext);
 
-  if (isSignedIn) {
+  if (user) {
     return redirect("/");
   }
 
@@ -25,8 +25,7 @@ export default function SigninPage() {
             .post(`${process.env.NEXT_PUBLIC_API}/signin`, { credential, password })
             .then((res) => {
               toast.success("Амжилттай нэвтэрлээ");
-              setIsSignedIn(true);
-              localStorage.setItem("isSignedIn", true);
+              setAccessToken(res.data.accessToken);
             })
             .catch((err) => {
               toast.error(err.response.data.message);

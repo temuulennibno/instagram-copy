@@ -1,23 +1,33 @@
 "use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { toast } from "react-toastify";
-import { CiImageOn } from "react-icons/ci";
 import { ImageUploader } from "./ImageUploader";
+import { UserContext } from "../contexts/user-context";
 
 const CreatePage = () => {
+  const { accessToken } = useContext(UserContext);
   const [description, setDescription] = useState("");
   const [mediaUrl, setMediaUrl] = useState("");
   const router = useRouter();
 
   const handleSubmit = async () => {
-    const response = await axios.post("http://localhost:3333/api/posts", { description, mediaUrl });
-    if (response.status !== 200) {
-      toast.error("Post nemehed aldaa garlaa!");
-    } else {
+    try {
+      await axios.post(
+        "http://localhost:3333/api/posts",
+        { description, mediaUrl },
+        {
+          headers: {
+            Authorization: "Bearer " + accessToken,
+          },
+        }
+      );
       toast.success("Amjilttai post hiilee");
       router.push("/");
+    } catch (error) {
+      console.error(error);
+      toast.error("Nemehed aldaa garlaa");
     }
   };
 

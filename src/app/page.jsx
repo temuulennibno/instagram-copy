@@ -6,7 +6,7 @@ import Link from "next/link";
 import axios from "axios";
 
 export default function Home() {
-  const { isSignedIn, setIsSignedIn } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const [posts, setPosts] = useState([]);
 
@@ -16,7 +16,7 @@ export default function Home() {
     });
   }, []);
 
-  if (!isSignedIn) {
+  if (!user) {
     return redirect("/signin");
   }
 
@@ -32,6 +32,7 @@ export default function Home() {
             <li key={post.id}>
               <img src={post.mediaUrl} alt="" />
               {post.description}
+              <br />@{post.user.username}
             </li>
           ))}
         </ul>
