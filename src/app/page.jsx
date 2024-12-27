@@ -2,8 +2,9 @@
 import { redirect } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./contexts/user-context";
-import Link from "next/link";
 import axios from "axios";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   const { user } = useContext(UserContext);
@@ -21,22 +22,17 @@ export default function Home() {
   }
 
   return (
-    <>
-      <header className="flex justify-between p-4">
-        <Link href={"/"}>Instagram</Link>
-        <Link href={"/create"}>+</Link>
-      </header>
-      <main>
-        <ul>
-          {posts.map((post) => (
-            <li key={post.id}>
-              <img src={post.mediaUrl} alt="" />
-              {post.description}
-              <br />@{post.user.username}
-            </li>
-          ))}
-        </ul>
-      </main>
-    </>
+    <ul>
+      {posts.map((post) => (
+        <li key={post._id}>
+          <Image width={400} objectFit="contain" height={400} src={post.mediaUrl} alt="" />
+          {post.description}
+          <br />
+          <Link className="text-blue-500" href={"#"}>
+            @{post.user.username}
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 }
