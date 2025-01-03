@@ -8,8 +8,8 @@ export const ImageUploader = ({ setMediaUrl }) => {
   const [response, setResponse] = useState();
 
   return (
-    <div className="relative flex items-center justify-center w-20 h-20 my-4 rounded bg-slate-500">
-      <CiImageOn size={40} />
+    <div className="relative flex items-center justify-center w-full my-4 rounded aspect-square bg-slate-500">
+      {!response && <CiImageOn size={40} />}
       <input
         onChange={(e) => {
           setLoading(true);

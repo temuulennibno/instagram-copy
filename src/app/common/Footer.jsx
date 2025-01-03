@@ -22,8 +22,8 @@ export const Footer = () => {
       <Link href={"/"}>
         <CgMail size={20} />
       </Link>
-      <Link href={"/profile"}>
-        <Image width={20} height={20} src={user?.profileUrl} alt="" className="object-cover w-5 h-5 rounded-full" />
+      <Link href={`/${user?.username}`}>
+        <Image width={20} height={20} src={user?.profileUrl || "/noimage.png"} alt="" className="object-cover w-5 h-5 rounded-full" />
       </Link>
     </footer>
   );

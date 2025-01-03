@@ -28,7 +28,7 @@ export default function Home() {
           <Image width={400} objectFit="contain" height={400} src={post.mediaUrl} alt="" />
           {post.description}
           <br />
-          <Link className="text-blue-500" href={"#"}>
+          <Link className="text-blue-500" href={`/${post.user.username}`}>
             @{post.user.username}
           </Link>
         </li>

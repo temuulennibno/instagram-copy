@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <UserContextProvider>
           <Header />
-          <main className="pt-20">{children}</main>
+          <main className="pt-20 pb-[54px]">{children}</main>
           <Footer />
         </UserContextProvider>
         <ToastContainer position="bottom-right" />
