@@ -5,8 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import localFont from "next/font/local";
 import "./globals.css";
 import { UserContextProvider } from "./contexts/user-context";
-import { Header } from "./common/Header";
-import { Footer } from "./common/Footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,12 +20,8 @@ const geistMono = localFont({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <UserContextProvider>
-          <Header />
-          <main className="pt-20 pb-[54px]">{children}</main>
-          <Footer />
-        </UserContextProvider>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-[430px] mx-auto w-full`}>
+        <UserContextProvider>{children}</UserContextProvider>
         <ToastContainer position="bottom-right" />
       </body>
     </html>

@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/user-context";
 import axios from "axios";
 import { useParams } from "next/navigation";
+import { MainLayout } from "../common/MainLayout";
 
 const Page = () => {
   const { username } = useParams();
@@ -35,32 +36,34 @@ const Page = () => {
   const isOwner = currentUser._id === user._id;
 
   return (
-    <main className="px-4">
-      <div className="flex gap-4">
-        <div>
-          <Image alt="" src={user.profileUrl} width={100} height={100} className="border w-[100px] h-[100px] rounded-full object-cover" />
-        </div>
-        <div>
-          <h1 className="text-2xl font-bold">{user.username}</h1>
-          {isOwner && (
-            <div>
-              <button>Edit profile</button>
-            </div>
-          )}
+    <MainLayout>
+      <div className="px-4">
+        <div className="flex gap-4">
           <div>
-            {user.fullname} <br />
-            {user.bio}
+            <Image alt="" src={user.profileUrl} width={100} height={100} className="border w-[100px] h-[100px] rounded-full object-cover" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold">{user.username}</h1>
+            {isOwner && (
+              <div>
+                <button>Edit profile</button>
+              </div>
+            )}
+            <div>
+              {user.fullname} <br />
+              {user.bio}
+            </div>
           </div>
         </div>
+        <div className="grid grid-cols-3">
+          {posts.map((post) => (
+            <div key={post._id}>
+              <Image src={post.mediaUrl} alt={post.description} width={300} height={300} objectFit="cover" />
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="grid grid-cols-3">
-        {posts.map((post) => (
-          <div key={post._id}>
-            <Image src={post.mediaUrl} alt={post.description} width={300} height={300} objectFit="cover" />
-          </div>
-        ))}
-      </div>
-    </main>
+    </MainLayout>
   );
 };
 

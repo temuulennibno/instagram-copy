@@ -5,6 +5,7 @@ import { UserContext } from "./contexts/user-context";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import { MainLayout } from "./common/MainLayout";
 
 export default function Home() {
   const { user } = useContext(UserContext);
@@ -22,17 +23,19 @@ export default function Home() {
   }
 
   return (
-    <ul>
-      {posts.map((post) => (
-        <li key={post._id}>
-          <Image width={400} objectFit="contain" height={400} src={post.mediaUrl} alt="" />
-          {post.description}
-          <br />
-          <Link className="text-blue-500" href={`/${post.user.username}`}>
-            @{post.user.username}
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <MainLayout>
+      <ul>
+        {posts.map((post) => (
+          <li key={post._id}>
+            <Image width={400} objectFit="contain" height={400} src={post.mediaUrl} alt="" />
+            {post.description}
+            <br />
+            <Link className="text-blue-500" href={`/${post.user.username}`}>
+              @{post.user.username}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </MainLayout>
   );
 }
