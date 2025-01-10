@@ -6,6 +6,7 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { MainLayout } from "./common/MainLayout";
+import { PostCard } from "./common/PostCard";
 
 export default function Home() {
   const { user } = useContext(UserContext);
@@ -25,16 +26,11 @@ export default function Home() {
   return (
     <MainLayout>
       <ul>
-        {posts.map((post) => (
-          <li key={post._id}>
-            <Image width={400} objectFit="contain" height={400} src={post.mediaUrl} alt="" />
-            {post.description}
-            <br />
-            <Link className="text-blue-500" href={`/${post.user.username}`}>
-              @{post.user.username}
-            </Link>
-          </li>
-        ))}
+        {posts
+          .filter((post) => Boolean(post.mediaUrl))
+          .map((post) => (
+            <PostCard key={post._id} post={post} />
+          ))}
       </ul>
     </MainLayout>
   );
