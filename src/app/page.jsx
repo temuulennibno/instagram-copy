@@ -25,7 +25,7 @@ export default function Home() {
 
   return (
     <MainLayout>
-      <ul>
+      <ul className="grid grid-cols-1 gap-4">
         {posts
           .filter((post) => Boolean(post.mediaUrl))
           .map((post) => (
