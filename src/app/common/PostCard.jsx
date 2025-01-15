@@ -3,6 +3,10 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/user-context";
 import axios from "axios";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 export const PostCard = ({ post }) => {
   const { user, accessToken } = useContext(UserContext);
@@ -98,6 +102,7 @@ export const PostCard = ({ post }) => {
         </button>
       </div>
       <p>{post.description}</p>
+      <p>{dayjs(post.createdAt).fromNow()}</p>
 
       {!commentsShown && (
         <p
